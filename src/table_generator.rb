@@ -49,23 +49,16 @@ end
 
 class HTMLTableGenerator < TableGenerator
 
-  def generate_row(row)
-    "<tr>#{(row.map {|x| generate_item(x)}).join('</tr>')\n"
+  def generate
+    "<table>\n" + generate_header_row(@header) + (@data.map {|x| generate_row(x)}).join + "</table>\n"
   end
-
-  def generate_header_row
-    "<table>#{generate_row(@header)}</table>"
-  end
-
-end
-
-class AsciiDocTableGenerator < TableGenerator
 
   def generate_row(row)
+    "<tr>#{(row.map {|x| '<td>' + generate_item(x.to_s)}).join('</td>')}</td></tr>\n"
   end
 
-  def generate_header_row
-    
+  def generate_header_row(header)
+    "<tr>#{(header.map {|x| '<th>' + generate_item(x)}).join('</th>')}</th></tr>\n"
   end
 
 end
