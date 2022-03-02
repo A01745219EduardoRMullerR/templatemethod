@@ -46,3 +46,26 @@ class CSVTableGenerator < TableGenerator
   end
 
 end
+
+class HTMLTableGenerator < TableGenerator
+
+  def generate_row(row)
+    "<tr>#{(row.map {|x| generate_item(x)}).join('</tr>')\n"
+  end
+
+  def generate_header_row
+    "<table>#{generate_row(@header)}</table>"
+  end
+
+end
+
+class AsciiDocTableGenerator < TableGenerator
+
+  def generate_row(row)
+  end
+
+  def generate_header_row
+    
+  end
+
+end
